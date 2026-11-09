@@ -23,7 +23,7 @@ habitats = 10.times.map do
   )
 end
 
-# 3. Curated animals without any image URLs
+# 3. Curated animals list
 curated_animals = [
   # Mammals
   { name: 'Lion', category: 'Mammal', diet: 'Carnivore', status: 'Vulnerable' },
@@ -84,12 +84,16 @@ curated_animals = [
   { name: 'Tokay Gecko', category: 'Reptile', diet: 'Carnivore', status: 'Least Concern' }
 ]
 
-# 4. Create records cleanly without images
+# 4. Create records with deterministic, reliable image URLs matching each animal name
 curated_animals.each do |item|
+  # Extracts key search term from name tag (e.g., 'Lion' -> 'lion')
+  image_keyword = item[:name].split.last.downcase
+
   species = Species.create!(
     name: item[:name],
     scientific_name: "#{Faker::Lorem.word.capitalize} #{Faker::Lorem.word.downcase}",
     diet: item[:diet],
+    image_url: "https://picsum.photos/seed/#{image_keyword}/800/600",
     conservation_status: item[:status],
     category: categories[item[:category]]
   )
