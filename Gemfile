@@ -68,4 +68,4 @@ end
 gem 'kaminari'
 gem 'faker'
 gem "json", "< 3"
-gem 'minitest', '~> 5.16'
+gem 'minitest', '~> 6.0'
