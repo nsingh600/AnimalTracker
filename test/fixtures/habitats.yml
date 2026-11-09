@@ -1,0 +1,9 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  climate: MyString
+  region_name: MyString
+
+two:
+  climate: MyString
+  region_name: MyString

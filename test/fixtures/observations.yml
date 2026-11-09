@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  location_name: MyString
+  latitude: 1.5
+  longitude: 1.5
+  observed_at: 2026-11-09 10:35:38
+  species: one
+
+two:
+  location_name: MyString
+  latitude: 1.5
+  longitude: 1.5
+  observed_at: 2026-11-09 10:35:38
+  species: two

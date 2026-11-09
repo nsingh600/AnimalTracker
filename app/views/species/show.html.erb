@@ -1,0 +1,42 @@
+<div class="box">
+  <div class="columns">
+    <div class="column is-one-third">
+      <figure class="image is-4by3 mb-4">
+        <img src="<%= @species.image_url %>" alt="<%= @species.name %>">
+      </figure>
+    </div>
+    <div class="column">
+      <h1 class="title"><%= @species.name %></h1>
+      <h2 class="subtitle"><em><%= @species.scientific_name %></em></h2>
+
+      <p><strong>Category:</strong> <%= link_to @species.category.name, category_path(@species.category) %></p>
+      <p><strong>Diet:</strong> <%= @species.diet %></p>
+      <p><strong>Conservation Status:</strong> <%= @species.conservation_status %></p>
+    </div>
+  </div>
+
+  <h3 class="title is-5 mt-4">Habitats</h3>
+  <ul>
+    <% @species.habitats.each do |habitat| %>
+      <li><%= link_to "#{habitat.region_name} (#{habitat.climate})", habitat_path(habitat) %></li>
+    <% end %>
+  </ul>
+
+  <h3 class="title is-5 mt-5">Wildlife Observations Map</h3>
+  <div id="map" style="height: 400px; width: 100%;" class="mb-4"></div>
+
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      var map = L.map('map').setView([0, 0], 2);
+      L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        attribution: '&copy; OpenStreetMap contributors'
+      }).addTo(map);
+
+      <% @species.observations.each do |obs| %>
+        L.marker([<%= obs.latitude %>, <%= obs.longitude %>])
+         .addTo(map)
+         .bindPopup("<b><%= j obs.location_name %></b><br>Observed: <%= obs.observed_at.strftime('%Y-%m-%d') %>");
+      <% end %>
+    });
+  </script>
+</div>

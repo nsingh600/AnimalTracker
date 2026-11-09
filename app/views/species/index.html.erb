@@ -1,0 +1,42 @@
+<h1 class="title">Species Directory</h1>
+
+<div class="box">
+  <%= form_with url: species_index_path, method: :get, local: true do |f| %>
+    <div class="field is-grouped">
+      <div class="control is-expanded">
+        <%= f.text_field :query, value: params[:query], class: 'input', placeholder: 'Search by species name...' %>
+      </div>
+      <div class="control">
+        <div class="select">
+          <%= f.select :category_id, options_from_collection_for_select(@categories, :id, :name, params[:category_id]), include_blank: 'All Categories' %>
+        </div>
+      </div>
+      <div class="control">
+        <%= f.submit 'Search', class: 'button is-primary' %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div class="columns is-multiline">
+  <% @species.each do |animal| %>
+    <div class="column is-one-third">
+      <div class="card">
+        <div class="card-image">
+          <figure class="image is-4by3">
+            <img src="<%= animal.image_url %>" alt="<%= animal.name %>">
+          </figure>
+        </div>
+        <div class="card-content">
+          <p class="title is-4"><%= link_to animal.name, species_path(animal) %></p>
+          <p class="subtitle is-6"><em><%= animal.scientific_name %></em></p>
+          <span class="tag is-info"><%= animal.category.name %></span>
+        </div>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div class="mt-4">
+  <%= paginate @species %>
+</div>
