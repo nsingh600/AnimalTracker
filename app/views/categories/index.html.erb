@@ -1,2 +1,20 @@
-<h1>Categories#index</h1>
-<p>Find me in app/views/categories/index.html.erb</p>
+<section class="section">
+  <div class="container">
+    <h1 class="title">Animal Categories</h1>
+    <p class="subtitle">Explore species grouped by biological categories.</p>
+
+    <div class="columns is-multiline">
+      <% @categories.each do |category| %>
+        <div class="column is-one-third">
+          <div class="card">
+            <div class="card-content">
+              <p class="title is-4"><%= link_to category.name, category %></p>
+              <p class="subtitle is-6"><%= truncate(category.description, length: 100) %></p>
+              <p class="text-muted"><small><%= category.species.count %> species recorded</small></p>
+            </div>
+          </div>
+        </div>
+      <% end %>
+    </div>
+  </div>
+</section>
